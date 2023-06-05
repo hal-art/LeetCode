@@ -7,24 +7,29 @@
 # @lc code=start
 import math
 
+'''
+★アルゴリズム方針
+
+num ... numsの各要素
+
+1. numとtargetの補数を計算する
+2. 次のnumに移行する前に計算した補数が、過去に登録されているかどうか確認する
+    2-1. 登録されている場合は、補数に対するインデックスと現在のインデックスを返却
+    2-2. 登録されてない場合、ハッシュマップに登録して手順1に戻る
+'''
 class Solution:
     def twoSum(self, nums, target: int):
-        element1: int = 0
-        element2: int = 0
-        element_total: int = 0
+        complement_map = {}
         
-        for base_index in range(len(nums) - 1):
-            element1 = nums[base_index]
+        for i, num in enumerate(nums):
+            #1
+            complement = target - num
             
-            for offset_index in range(base_index+1, len(nums)):
-                element2 = nums[offset_index]
-                element_total = element1 + element2
-                
-                if(element_total != target):
-                    continue
-            
-                return [base_index, offset_index]
-            
-#obj = Solution()
-#obj.twoSum([1,6142,8192,10239], 18431)
+            #2
+            if(complement in complement_map):
+                #2-1
+                return [complement_map[complement], i]
+            else:
+                #2-2
+                complement_map[num] = i
 # @lc code=end
