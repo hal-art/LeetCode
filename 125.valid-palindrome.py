@@ -49,7 +49,4 @@ class Solution:
             right_index -= 1
             
         return is_palindrome
-
-#obj = Solution()
-#obj.isPalindrome("race a car")
 # @lc code=end
