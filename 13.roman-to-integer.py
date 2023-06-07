@@ -37,10 +37,13 @@ M = 1000
     2-2.次の文字は確認しないようにする
     2-3.continue
 3.siが該当しない場合は値に変換して次
+
+↓アルゴリズム改善後↓
+ローマ数字は左側から大きい数字順に並ぶという特性がある。
+そのため、もし現在の数字{si}よりも次の数字{si+1}の方が大きい場合は徐算をすればいい
 '''
 class Solution:
-    romans_2_arabic_except_list = [ "I", "X", "C"]
-    romans_2_arabic_dict = {
+    char_to_int = {
         "I" : 1,
         "V" : 5,
         "X" : 10,
@@ -48,34 +51,28 @@ class Solution:
         "C" : 100,
         "D" : 500,
         "M" : 1000,
-        "IV" : 4,
-        "IX" : 9,
-        "XL" : 40,
-        "XC" : 90,
-        "CD" : 400,
-        "CM" : 900
     }
     
     def romanToInt(self, s: str) -> int:
+        current_char_value = 0
+        next_char_value = 0
         value = 0
-        is_next_skip = False
-        for i, char in enumerate(s):
-            if is_next_skip:
-                is_next_skip = False
-                continue
+        
+        for i, c in enumerate(s):
+            current_char_value = self.char_to_int[c]
+            next_char_value = self.__get_next_char_value(s, i+1)
             
-            if char in self.romans_2_arabic_except_list and i+1 < len(s):
-                except_char = char + s[i+1]
-                if except_char in self.romans_2_arabic_dict:
-                    value += self.romans_2_arabic_dict[except_char]
-                    is_next_skip = True
-                else:
-                    value += self.romans_2_arabic_dict[char]
+            if current_char_value < next_char_value:
+                value -= current_char_value
             else:
-                value += self.romans_2_arabic_dict[char]
-                
+                value += current_char_value
+        
         return value
     
-#obj = Solution()
-#obj.romanToInt("MCMXCIV")
+    def __get_next_char_value(self, src: str, next_index: int) -> int:
+        if next_index >= len(src):
+            return 0
+        
+        c = src[next_index]
+        return self.char_to_int[c]
 # @lc code=end
