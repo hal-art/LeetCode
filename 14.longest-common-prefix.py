@@ -43,7 +43,6 @@ class Solution:
             if str1[i] != str2[i]:
                 break
             lcp += str1[i]
-
         return lcp
 # @lc code=end
 
