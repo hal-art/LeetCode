@@ -13,7 +13,7 @@
 2. strsの先頭 ~ strsの最後までの各文字列strに対し以下の行為を行う
     2-1.__getLCPByTwoStrsを呼ぶ
 3.lcpを返却
-    
+
 ★__getLCPByTwoStrsについて
 1.引数で得たstr1とstr2に対し以下の操作を行う
 2.それぞれ先頭から一文字(char)ずつ確認する
