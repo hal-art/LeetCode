@@ -23,12 +23,8 @@
 '''
 class Solution:
     def longestCommonPrefix(self, strs) -> str:
-        lcp = ""
         lcp = strs[0]
-        for i, str in enumerate(strs):
-            if i == 0:
-                continue
-            
+        for str in strs[1:]:
             lcp = self.__getLCPByTwoStrs(lcp, str)
             if lcp == '':
                 break
@@ -36,13 +32,12 @@ class Solution:
         return lcp
         
     def __getLCPByTwoStrs(self, str1:  str, str2: str) -> str:
-        length = min(len(str1), len(str2)) 
         lcp = ""
-
-        for i in range(length):  # 短い文字列の長さだけループを回す
-            if str1[i] != str2[i]:
+        
+        for c1, c2 in zip(str1, str2):
+            if c1 != c2:
                 break
-            lcp += str1[i]
+            lcp += c1
         return lcp
 # @lc code=end
 
