@@ -7,18 +7,17 @@
 # @lc code=start
 '''
 ○実装方針
-1.rootノードをenqueする
-2.以下を i(=1) < len(root)の間行う
-    2-1.dequeして現在のノード情報を取り出す
-    2-1.root[i]があるか確認する
-        2-1-1.ある場合はNode(root[i])をし左子ノードを作成する
-        2-1-2.enqueを行い、左子ノードを検査対象に含める
-        2-1-3.i++
-        
-    2-2.root[i+1]があるか確認する
-        2-2-1.ある場合はNode(root[i+1])をし右子ノードを作成する
-        2-2-2.enqueを行い、右子ノードを検査対象に含める
-        2-2-3.i++
+preorder-traversal(前序走査)のためstackを用いてdfsベースにて走査する
+
+1.rootノードをstackにpushする
+2.stackの中身が存在する間以下の操作を行う
+    2-1.stackの先頭を取り出し現在のノード(currentNode)を取り出す。
+    2-2.ノードを訪問したため、出力リスト(outList)にvalを追加する
+    
+    2-3.currentNodeの左子ノード(leftNode)が存在する場合
+        2-3-1.stackにleftNodeを追加する
+    2-4.currentNodeの右子ノード(rightNode)が存在する場合
+        2-4-1.stackにrightNodeを追加する
 '''
 class TreeNode:
     def __init__(self, x):
@@ -44,7 +43,5 @@ class Solution:
             if not currentNode.left is None:
                 stack.append(currentNode.left)
         return outList
-#obj = Solution()
-#obj.preorderTraversal([1,None,2,3])
 # @lc code=end
 
