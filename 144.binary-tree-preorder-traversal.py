@@ -26,21 +26,21 @@ class TreeNode:
         self.right = None
 
 class Solution:
-    def preorderTraversal(self, tree: TreeNode):
-        if tree is None:
-            return []
-        
+    def preorderTraversal(self, tree: TreeNode):        
         outList: list[int] = []
         stack: list[TreeNode] = [tree]
+        
+        if tree is None:
+            return []
         
         while stack:
             currentNode = stack.pop()
             outList.append(currentNode.val)
             
-            if not currentNode.right is None:
+            if currentNode.right:
                 stack.append(currentNode.right)
                 
-            if not currentNode.left is None:
+            if currentNode.left:
                 stack.append(currentNode.left)
         return outList
 # @lc code=end
