@@ -11,9 +11,7 @@ class Solution:
         rightIndex = len(s) - 1 - leftIndex
         
         while leftIndex < rightIndex:
-            tmp  = s[leftIndex]
-            s[leftIndex] = s[rightIndex]
-            s[rightIndex] = tmp
+            s[leftIndex], s[rightIndex] = s[rightIndex], s[leftIndex]
             
             leftIndex += 1
             rightIndex -= 1
